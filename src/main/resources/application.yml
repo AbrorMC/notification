@@ -4,8 +4,8 @@ spring:
 
   # JPA configuration
   datasource:
-    url: jdbc:postgresql://localhost:5432/delivery
-    username: user
+    url: jdbc:postgresql://localhost:5432/notification
+    username: postgres
     password: 123
     driver-class-name: org.postgresql.Driver
     tomcat:
