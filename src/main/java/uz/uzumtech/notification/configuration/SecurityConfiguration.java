@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import uz.uzumtech.notification.service.MerchantDetailsService;
+import uz.uzumtech.notification.service.impl.MerchantDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -38,8 +38,8 @@ public class SecurityConfiguration {
     protected SecurityFilterChain filterChainAdmin(final HttpSecurity http) throws Exception {
         return http.securityMatcher("/api/**").authorizeHttpRequests(
                         auth ->
-                                auth.requestMatchers("/api/notifications/sending", "/api/notifications").authenticated()
-                                        .requestMatchers("/api/notifications/registration").permitAll())
+                                auth.requestMatchers("/api/notification/sending", "/api/notification").authenticated()
+                                        .requestMatchers("/api/notification/registration").permitAll())
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)

@@ -1,10 +1,11 @@
-package uz.uzumtech.notification.service;
+package uz.uzumtech.notification.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import uz.uzumtech.notification.exception.UserNotFoundException;
 import uz.uzumtech.notification.repository.MerchantRepository;
 
 @Service
@@ -14,6 +15,6 @@ public class MerchantDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        return merchantRepository.findByLogin(username).orElseThrow(() -> new UserNotFoundException("User " + username + " not found"));
     }
 }
