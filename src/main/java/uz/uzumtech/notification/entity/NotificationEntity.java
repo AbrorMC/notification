@@ -40,7 +40,7 @@ public class NotificationEntity {
     String text;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "merchant_id", nullable = false)
+    @JoinColumn(name = "merchant_id", nullable = false, foreignKey = @ForeignKey(name = "fk_merchant"))
     MerchantEntity merchant;
 
     @Enumerated(EnumType.STRING)

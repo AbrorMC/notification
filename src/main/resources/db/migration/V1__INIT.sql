@@ -26,5 +26,5 @@ CREATE TABLE IF NOT EXISTS notifications (
     type            notification_type       NOT NULL,
     receiver_info   varchar(255)            NOT NULL,
 
-    FOREIGN KEY (merchant_id) REFERENCES merchants (id) ON DELETE CASCADE
+    CONSTRAINT fk_merchant FOREIGN KEY (merchant_id) REFERENCES merchants (id) ON DELETE CASCADE
 );
