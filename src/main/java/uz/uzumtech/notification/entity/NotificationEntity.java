@@ -18,6 +18,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "notifications")
+@NamedEntityGraph(
+        name = "Notification.withMerchant",
+        attributeNodes = @NamedAttributeNode("merchant")
+)
 public class NotificationEntity {
 
     @Id
@@ -39,8 +43,8 @@ public class NotificationEntity {
     @Column(nullable = false)
     String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "merchant_id", nullable = false, foreignKey = @ForeignKey(name = "fk_merchant"))
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "merchant_id")
     MerchantEntity merchant;
 
     @Enumerated(EnumType.STRING)
