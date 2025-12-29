@@ -5,14 +5,13 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uz.uzumtech.notification.dto.request.SendingRequest;
-import uz.uzumtech.notification.dto.response.SendingResponse;
+import uz.uzumtech.notification.dto.request.SendingRequestDto;
+import uz.uzumtech.notification.dto.response.SendingResponseDto;
 import uz.uzumtech.notification.service.NotificationService;
 
 @RestController
@@ -24,8 +23,8 @@ public class NotificationController {
     NotificationService notificationService;
 
     @PostMapping("/sending")
-    public ResponseEntity<SendingResponse> send(@Valid @RequestBody SendingRequest request) {
-        SendingResponse response = notificationService.send(request);
+    public ResponseEntity<SendingResponseDto> send(@Valid @RequestBody SendingRequestDto request) {
+        SendingResponseDto response = notificationService.send(request);
         return ResponseEntity.ok(response);
     }
 }

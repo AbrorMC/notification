@@ -2,13 +2,18 @@ package uz.uzumtech.notification.mapper;
 
 import jakarta.persistence.EntityManager;
 import org.mapstruct.*;
-import uz.uzumtech.notification.constant.enums.NotificationType;
-import uz.uzumtech.notification.dto.request.SendingRequest;
-import uz.uzumtech.notification.dto.response.SendingResponse;
+import uz.uzumtech.notification.dto.NotificationDto;
+import uz.uzumtech.notification.dto.request.SendingRequestDto;
+import uz.uzumtech.notification.dto.response.SendingResponseDto;
 import uz.uzumtech.notification.entity.MerchantEntity;
 import uz.uzumtech.notification.entity.NotificationEntity;
+import uz.uzumtech.notification.utils.MapperUtils;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(
+        componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        uses = {MapperUtils.class}
+)
 public interface NotificationMapper {
 
     @Mapping(target = "id", ignore = true)
@@ -16,24 +21,16 @@ public interface NotificationMapper {
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "merchant", source = "merchant", qualifiedByName = "getMerchant")
-    @Mapping(target = "receiverInfo", source = ".", qualifiedByName = "getReceiverInfo")
+    @Mapping(target = "receiverInfo.value", source = "targetAddress")
     @Mapping(target = "text", source = "text")
-    NotificationEntity toEntity(SendingRequest request, @Context EntityManager entityManager);
+    NotificationEntity toEntity(SendingRequestDto request, @Context EntityManager entityManager);
 
-    @Mapping(target = "data.notificationId", source = "merchant.id")
-    SendingResponse toDto(NotificationEntity entity);
+    @Mapping(target = "data.notificationId", source = "id")
+    SendingResponseDto toResponse(NotificationEntity entity);
 
-    @Named("getMerchant")
-    default MerchantEntity getMerchant(Long merchantId, @Context EntityManager entityManager) {
-        return entityManager.getReference(MerchantEntity.class, merchantId);
-    }
+    @Mapping(target = "key", source = "entity.id")
+    @Mapping(target = "correlationId", source = "correlationId")
+    @Mapping(target = "message", source = "entity", qualifiedByName = "toJson")
+    NotificationDto toDto(NotificationEntity entity, String correlationId);
 
-    @Named("getReceiverInfo")
-    default String getReceiverInfo(SendingRequest request) {
-        return switch (request.type()) {
-            case NotificationType.SMS -> request.receiver().phone();
-            case NotificationType.EMAIL -> request.receiver().email();
-            case NotificationType.PUSH -> request.receiver().firebaseToken();
-        };
-    }
 }

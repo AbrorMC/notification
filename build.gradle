@@ -45,6 +45,7 @@ dependencies {
 
     // DevTools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
 
     // Lombok
     compileOnly 'org.projectlombok:lombok'
@@ -57,6 +58,9 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.4.2.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+    // Kafka
+    implementation 'org.springframework.boot:spring-boot-starter-kafka'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-validation-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'

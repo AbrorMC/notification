@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import uz.uzumtech.notification.constant.enums.NotificationStatus;
 import uz.uzumtech.notification.constant.enums.NotificationType;
+import uz.uzumtech.notification.dto.request.ReceiverValue;
 
 import java.time.LocalDateTime;
 
@@ -51,6 +52,7 @@ public class NotificationEntity {
     @Column(nullable = false)
     NotificationType type;
 
-    @Column(nullable = false)
-    String receiverInfo;
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "receiver_info"))
+    private ReceiverValue receiverInfo;
 }

@@ -4,8 +4,10 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 @Data
+@Configuration
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ConfigurationProperties(prefix = "kafka")
 public class KafkaProps {
@@ -28,6 +30,6 @@ public class KafkaProps {
     @FieldDefaults(level = AccessLevel.PRIVATE)
     public static class Topic {
 
-        String orderTopic;
+        String notificationTopic;
     }
 }

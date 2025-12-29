@@ -3,7 +3,7 @@ package uz.uzumtech.notification.dto.request;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.URL;
 
-public record RegistrationRequest(
+public record RegistrationRequestDto(
 
         @NotBlank(message = "ИНН обязательно")
         @Pattern(regexp = "\\d{9}", message = "ИНН должен состоять из 9 цифр")

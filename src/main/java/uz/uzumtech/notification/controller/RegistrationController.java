@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uz.uzumtech.notification.dto.request.RegistrationRequest;
-import uz.uzumtech.notification.dto.response.RegistrationResponse;
+import uz.uzumtech.notification.dto.request.RegistrationRequestDto;
+import uz.uzumtech.notification.dto.response.RegistrationResponseDto;
 import uz.uzumtech.notification.service.RegistrationService;
 
 @RestController
@@ -24,8 +24,8 @@ public class RegistrationController {
     RegistrationService service;
 
     @PostMapping("/registration")
-    public ResponseEntity<RegistrationResponse> signUp(@Valid @RequestBody RegistrationRequest request) {
-        RegistrationResponse response = service.register(request);
+    public ResponseEntity<RegistrationResponseDto> signUp(@Valid @RequestBody RegistrationRequestDto request) {
+        RegistrationResponseDto response = service.register(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }

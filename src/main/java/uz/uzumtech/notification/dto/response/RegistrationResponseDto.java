@@ -1,6 +1,6 @@
 package uz.uzumtech.notification.dto.response;
 
-public record RegistrationResponse(
+public record RegistrationResponseDto(
         Data data
 ) {
     public record Data(

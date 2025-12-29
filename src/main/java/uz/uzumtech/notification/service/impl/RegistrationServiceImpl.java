@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import uz.uzumtech.notification.dto.request.RegistrationRequest;
-import uz.uzumtech.notification.dto.response.RegistrationResponse;
+import uz.uzumtech.notification.dto.request.RegistrationRequestDto;
+import uz.uzumtech.notification.dto.response.RegistrationResponseDto;
 import uz.uzumtech.notification.entity.MerchantEntity;
 import uz.uzumtech.notification.exception.DuplicateUserException;
 import uz.uzumtech.notification.mapper.MerchantMapper;
@@ -26,7 +26,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     PasswordUtils passwordUtils;
 
     @Override
-    public RegistrationResponse register(RegistrationRequest request) {
+    public RegistrationResponseDto register(RegistrationRequestDto request) {
         String password = passwordUtils.generatePassword(10);
         String encodedPassword = passwordEncoder.encode(password);
 
@@ -38,7 +38,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         MerchantEntity savedMerchant = saveMerchant(merchant);
 
-        return new RegistrationResponse(new RegistrationResponse.Data(savedMerchant.getId(), password));
+        return new RegistrationResponseDto(new RegistrationResponseDto.Data(savedMerchant.getId(), password));
     }
 
     @Transactional
