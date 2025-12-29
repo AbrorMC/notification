@@ -37,23 +37,23 @@ spring:
     schemas: postgres
 
 # Kafka
-#kafka:
-#  bootstrapServers: ${KAFKA_BOOTSTRAP_SERVERS}
-#  groupId: ${KAFKA_CARD_GROUP_ID}
-#  clientId: ${KAFKA_CARD_CLIENT_ID}
-#  acksConfig: ${KAFKA_ACKS_CONFIG}
-#  retriesConfig: ${KAFKA_RETRIES_CONFIG:3}
-#  lingerMsConfig: ${KAFKA_LINGER_MS_CONFIG:100}
-#  clientDnsLookup: ${KAFKA_CLIENT_DNS_LOOKUP}
-#  batchSizeConfig: ${KAFKA_BATCH_SIZE_CONFIG:16384}
-#  bufferMemoryConfig: ${KAFKA_BUFFER_MEMORY_CONFIG:32768}
-#  autoOffsetResetConfig: ${KAFKA_AUTO_OFFSET_RESET_CONFIG}
-#  saslProtocol: ${KAFKA_SASL_PROTOCOL}
-#  saslMechanism: ${KAFKA_SASL_MECHANISM}
-#  saslUsername: ${KAFKA_SASL_USERNAME}
-#  saslPassword: ${KAFKA_SASL_PASSWORD}
-#
-#  topics:
+  kafka:
+    bootstrapServers: ${KAFKA_BOOTSTRAP_SERVERS}
+    groupId: ${KAFKA_CARD_GROUP_ID}
+    clientId: ${KAFKA_CARD_CLIENT_ID}
+    acksConfig: ${KAFKA_ACKS_CONFIG}
+    retriesConfig: ${KAFKA_RETRIES_CONFIG:3}
+    lingerMsConfig: ${KAFKA_LINGER_MS_CONFIG:100}
+    clientDnsLookup: ${KAFKA_CLIENT_DNS_LOOKUP}
+    batchSizeConfig: ${KAFKA_BATCH_SIZE_CONFIG:16384}
+    bufferMemoryConfig: ${KAFKA_BUFFER_MEMORY_CONFIG:32768}
+    autoOffsetResetConfig: ${KAFKA_AUTO_OFFSET_RESET_CONFIG}
+    saslProtocol: ${KAFKA_SASL_PROTOCOL}
+    saslMechanism: ${KAFKA_SASL_MECHANISM}
+    saslUsername: ${KAFKA_SASL_USERNAME}
+    saslPassword: ${KAFKA_SASL_PASSWORD}
+
+    topics:
 
 # Tomcat configuration
 server:

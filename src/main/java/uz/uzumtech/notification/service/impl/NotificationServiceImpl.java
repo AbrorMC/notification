@@ -5,11 +5,9 @@ import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uz.uzumtech.notification.dto.request.SendingRequest;
 import uz.uzumtech.notification.dto.response.SendingResponse;
-import uz.uzumtech.notification.exception.UserNotFoundException;
 import uz.uzumtech.notification.mapper.NotificationMapper;
 import uz.uzumtech.notification.repository.NotificationRepository;
 import uz.uzumtech.notification.service.NotificationService;
@@ -27,8 +25,8 @@ public class NotificationServiceImpl implements NotificationService {
     @Transactional
     @Override
     public SendingResponse send(SendingRequest request) {
-        var entity = notificationMapper.toEntity(request, entityManager);
-        var result = notificationRepository.save(entity);
+        var notificationEntity = notificationMapper.toEntity(request, entityManager);
+        var result = notificationRepository.save(notificationEntity);
 
         return notificationMapper.toDto(result);
     }
