@@ -5,7 +5,6 @@ import org.mapstruct.*;
 import uz.uzumtech.notification.dto.NotificationDto;
 import uz.uzumtech.notification.dto.request.SendingRequestDto;
 import uz.uzumtech.notification.dto.response.SendingResponseDto;
-import uz.uzumtech.notification.entity.MerchantEntity;
 import uz.uzumtech.notification.entity.NotificationEntity;
 import uz.uzumtech.notification.utils.MapperUtils;
 

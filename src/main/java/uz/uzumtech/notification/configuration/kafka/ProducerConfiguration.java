@@ -27,15 +27,15 @@ public class ProducerConfiguration {
     public Map<String, Object> objectDeserializerConfigs() {
         Map<String, Object> props = new HashMap<>();
 
-        props.put(ProducerConfig.CLIENT_ID_CONFIG, (kafkaProps.getClientId() + UUID.randomUUID()));
+//        props.put(ProducerConfig.CLIENT_ID_CONFIG, (kafkaProps.getClientId() + UUID.randomUUID()));
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProps.getBootstrapServers());
-        props.put(ProducerConfig.CLIENT_DNS_LOOKUP_CONFIG, kafkaProps.getClientDnsLookup());
-        props.put(ProducerConfig.ACKS_CONFIG, kafkaProps.getAcksConfig());
-        props.put(ProducerConfig.RETRIES_CONFIG, kafkaProps.getRetriesConfig());
+//        props.put(ProducerConfig.CLIENT_DNS_LOOKUP_CONFIG, kafkaProps.getClientDnsLookup());
+//        props.put(ProducerConfig.ACKS_CONFIG, kafkaProps.getAcksConfig());
+//        props.put(ProducerConfig.RETRIES_CONFIG, kafkaProps.getRetriesConfig());
         props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
-        props.put(ProducerConfig.BATCH_SIZE_CONFIG, kafkaProps.getBatchSizeConfig());
-        props.put(ProducerConfig.LINGER_MS_CONFIG, kafkaProps.getLingerMsConfig());
-        props.put(ProducerConfig.BUFFER_MEMORY_CONFIG, kafkaProps.getBufferMemoryConfig());
+//        props.put(ProducerConfig.BATCH_SIZE_CONFIG, kafkaProps.getBatchSizeConfig());
+//        props.put(ProducerConfig.LINGER_MS_CONFIG, kafkaProps.getLingerMsConfig());
+//        props.put(ProducerConfig.BUFFER_MEMORY_CONFIG, kafkaProps.getBufferMemoryConfig());
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 

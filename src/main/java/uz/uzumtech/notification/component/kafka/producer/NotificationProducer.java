@@ -2,6 +2,7 @@ package uz.uzumtech.notification.component.kafka.producer;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import uz.uzumtech.notification.configuration.props.KafkaProps;
 import uz.uzumtech.notification.dto.NotificationDto;
 
+@Slf4j
 @Component
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class NotificationProducer {
