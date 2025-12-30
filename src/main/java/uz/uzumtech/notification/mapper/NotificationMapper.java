@@ -27,9 +27,9 @@ public interface NotificationMapper {
     @Mapping(target = "data.notificationId", source = "id")
     SendingResponseDto toResponse(NotificationEntity entity);
 
-    @Mapping(target = "key", source = "entity.id")
+    @Mapping(target = "key", source = "entity.type")
     @Mapping(target = "correlationId", source = "correlationId")
     @Mapping(target = "message", source = "entity", qualifiedByName = "toJson")
-    NotificationDto toDto(NotificationEntity entity, String correlationId);
+    NotificationDto toDto(String correlationId, NotificationEntity entity);
 
 }
