@@ -1,7 +1,6 @@
 package uz.uzumtech.notification.configuration.kafka;
 
-import com.fasterxml.jackson.databind.JsonSerializer;
-import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.kafka.support.serializer.JacksonJsonSerializer;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -9,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.serializer.ToStringSerializer;
 import uz.uzumtech.notification.configuration.props.KafkaProps;
 import uz.uzumtech.notification.dto.DlqDto;
 import uz.uzumtech.notification.dto.NotificationDto;
@@ -36,20 +36,32 @@ public class ProducerConfiguration {
         props.put(ProducerConfig.BATCH_SIZE_CONFIG, kafkaProps.getBatchSizeConfig());
         props.put(ProducerConfig.LINGER_MS_CONFIG, kafkaProps.getLingerMsConfig());
         props.put(ProducerConfig.BUFFER_MEMORY_CONFIG, kafkaProps.getBufferMemoryConfig());
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+//        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+//        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 
         return props;
     }
 
     @Bean("dlqTopic")
     public KafkaTemplate<String, DlqDto> dlqTemplate() {
-        return new KafkaTemplate<>(new DefaultKafkaProducerFactory<>(objectDeserializerConfigs()));
+        return new KafkaTemplate<>(
+                new DefaultKafkaProducerFactory<>(
+                        objectDeserializerConfigs(),
+                        ToStringSerializer::new,
+                        JacksonJsonSerializer::new
+                )
+        );
     }
 
     @Bean("notificationTopic")
     public KafkaTemplate<String, NotificationDto> notificationTemplate() {
-        return new KafkaTemplate<>(new DefaultKafkaProducerFactory<>(objectDeserializerConfigs()));
+        return new KafkaTemplate<>(
+                new DefaultKafkaProducerFactory<>(
+                        objectDeserializerConfigs(),
+                        ToStringSerializer::new,
+                        JacksonJsonSerializer::new
+                )
+        );
     }
 
 }

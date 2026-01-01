@@ -13,6 +13,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.support.serializer.JacksonJsonDeserializer;
 import uz.uzumtech.notification.configuration.props.KafkaProps;
+import uz.uzumtech.notification.dto.NotificationDto;
 import uz.uzumtech.notification.dto.response.SendingResponseDto;
 import uz.uzumtech.notification.handler.KafkaExceptionHandler;
 
@@ -44,13 +45,13 @@ public class ConsumerConfiguration {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, SendingResponseDto> deliveryFactory() {
-        return buildContainerFactory(SendingResponseDto.class);
+    public ConcurrentKafkaListenerContainerFactory<String, NotificationDto> notificationFactory() {
+        return buildContainerFactory(NotificationDto.class);
     }
 
     private <T> ConcurrentKafkaListenerContainerFactory<String, T> buildContainerFactory(Class<T> type) {
         JacksonJsonDeserializer<T> jsonDeserializer = new JacksonJsonDeserializer<>(type, false);
-        jsonDeserializer.addTrustedPackages("uz.spring.delivery.dto");
+        jsonDeserializer.addTrustedPackages("uz.uzumtech.notification.dto");
 
         DefaultKafkaConsumerFactory<String, T> consumerFactory = new DefaultKafkaConsumerFactory<>(
                 consumerConfigs(),
