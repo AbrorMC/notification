@@ -55,3 +55,6 @@ spring:
 # Tomcat configuration
 server:
   port: 8081
+
+app:
+  firebase-config-path: "classpath:firebase-service-account.json"

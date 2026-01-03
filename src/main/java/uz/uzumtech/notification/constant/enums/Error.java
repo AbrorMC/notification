@@ -12,7 +12,10 @@ public enum Error {
     INVALID_REQUEST_PARAM_ERROR_CODE(10006, "Invalid request param"),
     INTERNAL_TIMEOUT_ERROR_CODE(10007, "Internal timeout"),
     METHOD_NOT_SUPPORTED_ERROR_CODE(10008, "Method not supported"),
-    MISSING_REQUEST_HEADER_ERROR_CODE(10009, "Missing request header");
+    MISSING_REQUEST_HEADER_ERROR_CODE(10009, "Missing request header"),
+    HTTP_SERVICE_ERROR_CODE(10010, "Service error code"),
+    HTTP_CLIENT_ERROR_CODE(10011, "Client error code");
+
 
     final int code;
     final String message;

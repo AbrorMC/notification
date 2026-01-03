@@ -6,7 +6,6 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-import uz.uzumtech.notification.component.kafka.consumer.NotificationConsumer;
 import uz.uzumtech.notification.component.kafka.producer.NotificationProducer;
 import uz.uzumtech.notification.dto.request.SendingRequestDto;
 import uz.uzumtech.notification.dto.response.SendingResponseDto;
