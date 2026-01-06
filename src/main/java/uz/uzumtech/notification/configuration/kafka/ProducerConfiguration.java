@@ -1,5 +1,6 @@
 package uz.uzumtech.notification.configuration.kafka;
 
+import org.apache.kafka.clients.producer.Partitioner;
 import org.springframework.kafka.support.serializer.JacksonJsonSerializer;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -36,6 +37,7 @@ public class ProducerConfiguration {
         props.put(ProducerConfig.BATCH_SIZE_CONFIG, kafkaProps.getBatchSizeConfig());
         props.put(ProducerConfig.LINGER_MS_CONFIG, kafkaProps.getLingerMsConfig());
         props.put(ProducerConfig.BUFFER_MEMORY_CONFIG, kafkaProps.getBufferMemoryConfig());
+        props.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, Partitioner.class);
 
         return props;
     }
