@@ -36,7 +36,7 @@ spring:
     baseline-version: 0
     schemas: postgres
 
-# Kafka
+  # Kafka
   kafka:
     bootstrapServers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     groupId: ${KAFKA_CARD_GROUP_ID}
@@ -49,12 +49,36 @@ spring:
     bufferMemoryConfig: ${KAFKA_BUFFER_MEMORY_CONFIG:32768}
     autoOffsetResetConfig: ${KAFKA_AUTO_OFFSET_RESET_CONFIG:latest}
 
-    topic:
-      notificationTopic: ${KAFKA_NOTIFICATION_TOPIC:notificationTopic}
+    topics:
+      sms:
+        name: "notification.sms"
+        partitions: 3
+        replicas: 1
+      email:
+        name: "notification.email"
+        partitions: 3
+        replicas: 1
+      push:
+        name: "notification.push"
+        partitions: 1
+        replicas: 1
+
+  # Email
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: mirac.9187@gmail.com
+    password: "vvfvxbglhwlmpyoa"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 # Tomcat configuration
 server:
   port: 8081
 
 app:
-  firebase-config-path: "classpath:firebase-service-account.json"
+  firebase-config-path: "firebase-service-account.json"

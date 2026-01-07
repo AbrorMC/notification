@@ -14,7 +14,6 @@ import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.support.serializer.JacksonJsonDeserializer;
 import uz.uzumtech.notification.configuration.props.KafkaProps;
 import uz.uzumtech.notification.dto.NotificationDto;
-import uz.uzumtech.notification.dto.response.SendingResponseDto;
 import uz.uzumtech.notification.handler.KafkaExceptionHandler;
 
 import java.util.HashMap;

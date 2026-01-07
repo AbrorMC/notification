@@ -34,7 +34,7 @@ public class NotificationServiceImpl implements NotificationService {
 
         var notificationDto = notificationMapper.toDto(UUID.randomUUID().toString(), notificationEntity);
 
-        notificationProducer.sendMessage(notificationDto);
+        notificationProducer.sendMessage(notificationDto, request.type());
 
         return notificationMapper.toResponse(result);
     }

@@ -7,10 +7,12 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 @Configuration
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -19,10 +21,11 @@ public class FirebaseConfiguration {
     @Value("${app.firebase-config-path}")
     String configPath;
 
+    @Bean
     public FirebaseMessaging firebaseMessaging() throws IOException {
-        FileInputStream serviceAccount = new FileInputStream(configPath);
+        InputStream serviceAccount = new ClassPathResource(configPath).getInputStream();
 
-        FirebaseOptions options = new FirebaseOptions.Builder()
+        FirebaseOptions options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .build();
 

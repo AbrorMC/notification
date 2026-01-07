@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "spring.kafka")
 public class KafkaProps {
 
-    Topic topic;
+    Topics topics;
 
     String bootstrapServers;
     String clientId;
@@ -28,8 +28,18 @@ public class KafkaProps {
 
     @Data
     @FieldDefaults(level = AccessLevel.PRIVATE)
-    public static class Topic {
+    public static class Topics {
 
-        String notificationTopic;
+        Topic sms;
+        Topic email;
+        Topic push;
+
+        @Data
+        @FieldDefaults(level = AccessLevel.PRIVATE)
+        public static class Topic {
+            String name;
+            int partitions;
+            int replicas = 1;
+        }
     }
 }
