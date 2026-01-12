@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import uz.uzumtech.notification.constant.enums.NotificationStatus;
 import uz.uzumtech.notification.entity.NotificationEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Async("taskExecutor")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class NotificationProcessService {
 

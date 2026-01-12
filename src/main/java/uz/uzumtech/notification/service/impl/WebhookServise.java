@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import uz.uzumtech.notification.entity.NotificationEntity;
@@ -16,6 +17,7 @@ public class WebhookServise {
 
     RestClient restClient;
 
+    @Async("taskExecutor")
     public void sendCallback(NotificationEntity notification) {
         try {
             restClient.post()
