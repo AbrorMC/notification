@@ -5,8 +5,8 @@ spring:
   # JPA configuration
   datasource:
     url: jdbc:postgresql://localhost:5432/notification
-    username: postgres
-    password: 123
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
     tomcat:
       test-on-borrow: true
@@ -38,16 +38,16 @@ spring:
 
   # Kafka
   kafka:
-    bootstrapServers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrapServers: ${KAFKA_BOOTSTRAP_SERVERS}
     groupId: ${KAFKA_CARD_GROUP_ID}
     clientId: ${KAFKA_CARD_CLIENT_ID}
-    acksConfig: ${KAFKA_ACKS_CONFIG:all}
-    retriesConfig: ${KAFKA_RETRIES_CONFIG:3}
-    lingerMsConfig: ${KAFKA_LINGER_MS_CONFIG:100}
-    clientDnsLookup: ${KAFKA_CLIENT_DNS_LOOKUP:use_all_dns_ips}
-    batchSizeConfig: ${KAFKA_BATCH_SIZE_CONFIG:16384}
-    bufferMemoryConfig: ${KAFKA_BUFFER_MEMORY_CONFIG:32768}
-    autoOffsetResetConfig: ${KAFKA_AUTO_OFFSET_RESET_CONFIG:latest}
+    acksConfig: ${KAFKA_ACKS_CONFIG}
+    retriesConfig: ${KAFKA_RETRIES_CONFIG}
+    lingerMsConfig: ${KAFKA_LINGER_MS_CONFIG}
+    clientDnsLookup: ${KAFKA_CLIENT_DNS_LOOKUP}
+    batchSizeConfig: ${KAFKA_BATCH_SIZE_CONFIG}
+    bufferMemoryConfig: ${KAFKA_BUFFER_MEMORY_CONFIG}
+    autoOffsetResetConfig: ${KAFKA_AUTO_OFFSET_RESET_CONFIG}
 
     topics:
       sms:
@@ -67,8 +67,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: mirac.9187@gmail.com
-    password: "vvfvxbglhwlmpyoa"
+    username: ${SMTP_EMAIL}
+    password: ${SMTP_PASSWORD}
     properties:
       mail:
         smtp:

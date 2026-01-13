@@ -62,7 +62,7 @@ public class ConsumerConfiguration {
 
         factory.setConsumerFactory(consumerFactory);
         factory.setBatchListener(false);
-        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.RECORD);
         factory.setCommonErrorHandler(kafkaErrorHandler);
 
         return factory;

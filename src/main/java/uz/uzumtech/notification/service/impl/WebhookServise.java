@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
+import uz.uzumtech.notification.dto.NotificationDto;
 import uz.uzumtech.notification.entity.NotificationEntity;
 
 @Service
@@ -21,7 +22,7 @@ public class WebhookServise {
     public void sendCallback(NotificationEntity notification) {
         try {
             restClient.post()
-                    .uri("https://merchant-api.com/webhook")
+                    .uri("https://webhook.site/726d69d9-e960-4523-b317-725b7b0da649")
                     .body(notification)
                     .retrieve()
                     .toBodilessEntity();

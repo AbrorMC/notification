@@ -6,8 +6,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import uz.uzumtech.notification.constant.enums.NotificationStatus;
 import uz.uzumtech.notification.entity.NotificationEntity;
+import uz.uzumtech.notification.mapper.NotificationMapper;
 import uz.uzumtech.notification.repository.NotificationRepository;
 import uz.uzumtech.notification.service.NotificationSenderService;
 
@@ -22,6 +25,7 @@ public class NotificationProcessService {
     NotificationRepository notificationRepository;
     List<NotificationSenderService> senderServices;
     WebhookServise webhookServise;
+    NotificationMapper mapper;
 
     @Transactional
     public void processNotification(Long id) {
@@ -53,7 +57,7 @@ public class NotificationProcessService {
                 .orElseThrow(() -> new IllegalArgumentException("Notification with id:" + id + " not found"));
 
         notification.setStatus(NotificationStatus.FAILED);
-        notificationRepository.findById(id).ifPresent(webhookServise::sendCallback);
+//        notificationRepository.findById(id).ifPresent(webhookServise::sendCallback);
 
     }
 }
