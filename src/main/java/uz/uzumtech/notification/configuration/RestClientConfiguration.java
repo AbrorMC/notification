@@ -25,7 +25,7 @@ public class RestClientConfiguration {
     public ClientHttpRequestFactory clientHttpRequestFactory() {
         var settings = HttpClientSettings
                 .defaults()
-                .withReadTimeout(Duration.ofMillis(5))
+                .withReadTimeout(Duration.ofMillis(5000))
                 .withConnectTimeout(Duration.ofMillis(5000));
 
         return ClientHttpRequestFactoryBuilder.jdk().build(settings);

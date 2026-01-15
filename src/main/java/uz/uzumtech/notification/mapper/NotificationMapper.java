@@ -3,6 +3,7 @@ package uz.uzumtech.notification.mapper;
 import jakarta.persistence.EntityManager;
 import org.mapstruct.*;
 import uz.uzumtech.notification.dto.NotificationDto;
+import uz.uzumtech.notification.dto.WebhookDto;
 import uz.uzumtech.notification.dto.request.SendingRequestDto;
 import uz.uzumtech.notification.dto.response.SendingResponseDto;
 import uz.uzumtech.notification.entity.NotificationEntity;
@@ -32,4 +33,7 @@ public interface NotificationMapper {
     @Mapping(target = "message", source = "entity.id")
     NotificationDto toDto(String correlationId, NotificationEntity entity);
 
+    @Mapping(target = "recipient", source = "entity.receiverInfo.value")
+    @Mapping(target = "content", source = "entity.text")
+    WebhookDto toWebhookDto(NotificationEntity entity);
 }

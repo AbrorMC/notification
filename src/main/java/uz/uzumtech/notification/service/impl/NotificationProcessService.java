@@ -57,7 +57,7 @@ public class NotificationProcessService {
                 .orElseThrow(() -> new IllegalArgumentException("Notification with id:" + id + " not found"));
 
         notification.setStatus(NotificationStatus.FAILED);
-//        notificationRepository.findById(id).ifPresent(webhookServise::sendCallback);
+        notificationRepository.findById(id).ifPresent(webhookServise::sendCallback);
 
     }
 }

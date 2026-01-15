@@ -8,7 +8,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import uz.uzumtech.notification.dto.NotificationDto;
+import uz.uzumtech.notification.dto.WebhookDto;
 import uz.uzumtech.notification.entity.NotificationEntity;
+import uz.uzumtech.notification.mapper.NotificationMapper;
 
 @Service
 @RequiredArgsConstructor
@@ -17,17 +19,23 @@ import uz.uzumtech.notification.entity.NotificationEntity;
 public class WebhookServise {
 
     RestClient restClient;
+    NotificationMapper mapper;
 
     @Async("taskExecutor")
     public void sendCallback(NotificationEntity notification) {
+
+        String webhookUri = notification.getMerchant().getWebhook();
+        var webhookDto = mapper.toWebhookDto(notification);
+
         try {
             restClient.post()
-                    .uri("https://webhook.site/726d69d9-e960-4523-b317-725b7b0da649")
-                    .body(notification)
+                    .uri(webhookUri)
+                    .body(webhookDto)
                     .retrieve()
                     .toBodilessEntity();
+            log.info("Webhook {} sent successfully to {}", webhookDto, webhookUri);
         } catch (Exception ex) {
-            log.error("Webhook failed for ID {}", notification.getId());
+            log.error("Webhook failed for ID {}. Reason: {}", notification.getId(), ex.getMessage());
         }
     }
 }
