@@ -25,7 +25,6 @@ public class NotificationProcessService {
     NotificationRepository notificationRepository;
     List<NotificationSenderService> senderServices;
     WebhookServise webhookServise;
-    NotificationMapper mapper;
 
     @Transactional
     public void processNotification(Long id) {
@@ -57,6 +56,7 @@ public class NotificationProcessService {
                 .orElseThrow(() -> new IllegalArgumentException("Notification with id:" + id + " not found"));
 
         notification.setStatus(NotificationStatus.FAILED);
+        notificationRepository.save(notification);
         notificationRepository.findById(id).ifPresent(webhookServise::sendCallback);
 
     }
