@@ -11,15 +11,11 @@ import uz.uzumtech.notification.entity.NotificationEntity;
 import uz.uzumtech.notification.service.NotificationSenderService;
 
 @Service
-//@RequiredArgsConstructor
-//@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class EmailNotificationSender implements NotificationSenderService {
 
-    private final JavaMailSender mailSender;
-
-    public EmailNotificationSender(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
+    JavaMailSender mailSender;
 
     @Override
     public NotificationType getType() {
