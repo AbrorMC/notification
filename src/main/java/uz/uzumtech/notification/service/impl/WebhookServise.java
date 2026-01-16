@@ -11,6 +11,7 @@ import uz.uzumtech.notification.dto.NotificationDto;
 import uz.uzumtech.notification.dto.WebhookDto;
 import uz.uzumtech.notification.entity.NotificationEntity;
 import uz.uzumtech.notification.mapper.NotificationMapper;
+import uz.uzumtech.notification.repository.NotificationRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +21,13 @@ public class WebhookServise {
 
     RestClient restClient;
     NotificationMapper mapper;
+    NotificationRepository repository;
 
-    @Async("taskExecutor")
-    public void sendCallback(NotificationEntity notification) {
+//    @Async("taskExecutor")
+    public void sendCallback(Long id) {
+
+        var notification = repository.findWithMerchantById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Notification with id:" + id + " not found"));;
 
         String webhookUri = notification.getMerchant().getWebhook();
         var webhookDto = mapper.toWebhookDto(notification);

@@ -18,13 +18,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Async("taskExecutor")
+//@Async("taskExecutor") Потокобезопасность и параллелизм здесь должна обеспечивать Kafka, а не Spring Async
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class NotificationProcessService {
 
     NotificationRepository notificationRepository;
     List<NotificationSenderService> senderServices;
-    WebhookServise webhookServise;
 
     @Transactional
     public void processNotification(Long id) {
@@ -41,7 +40,6 @@ public class NotificationProcessService {
             senderService.send(notification);
             notification.setStatus(NotificationStatus.SENT);
             notificationRepository.save(notification);
-            webhookServise.sendCallback(notification);
         } catch (Exception ex) {
             throw ex;
         }
@@ -57,7 +55,6 @@ public class NotificationProcessService {
 
         notification.setStatus(NotificationStatus.FAILED);
         notificationRepository.save(notification);
-        notificationRepository.findById(id).ifPresent(webhookServise::sendCallback);
 
     }
 }

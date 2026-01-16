@@ -76,6 +76,10 @@ spring:
           starttls:
             enable: true
 
+  sms-provider:
+    token: ${SMS_PROVIDER_TOKEN}
+    url: ${SMS_PROVIDER_URL}
+
 # Tomcat configuration
 server:
   port: 8081
